@@ -6,7 +6,7 @@
   "scripts": {
     "test": "",
     "star": "node ./dist/app",
-    "dev": "ts-node-dev ./src/app",
+    "dev": "ts-node-dev ./src/server",
     "tsc": "tsc"
   },
   "keywords": [],

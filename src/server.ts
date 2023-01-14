@@ -2,27 +2,21 @@ import express, { Application } from "express";
 import cors from "cors";
 
 import { config } from "./config/env.config";
+import { databaseRun } from "./database/connectDb";
+import { router as userRouter } from "./users/user.route";
 
-export class Server {
-  private app: Application;
-  private port: string | number;
+const app: Application = express();
+const port: number | string = config.port;
 
-  constructor() {
-    this.app = express();
-    this.port = config.port;
+//Middlewares
+app.use(express.json());
+app.use(cors());
 
-    this.listen();
-    this.middleware();
-  }
+//Routes
+app.use("/users", userRouter);
 
-  middleware() {
-    this.app.use(express.json());
-    this.app.use(cors());
-  }
+databaseRun();
 
-  listen() {
-    this.app.listen(this.port, () => {
-      console.log(`SERVER IN PORT: ${this.port}`);
-    });
-  }
-}
+app.listen(port, () => {
+  console.log(`SERVER IN PORT: ${port}`);
+});

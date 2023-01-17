@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../database/connectDb";
 import { User as UserEntity } from "../users/user.entity";
 
-export const User = sequelize.define<UserEntity>("User", {
+export const User = sequelize.define<UserEntity>("user", {
   id: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -30,6 +30,7 @@ export const User = sequelize.define<UserEntity>("User", {
   },
   role: {
     type: DataTypes.ENUM("administrator", "cashier"),
+    defaultValue: "cashier",
     allowNull: false,
   },
   city: {

@@ -11,7 +11,7 @@ export const sequelize = new Sequelize({
   dialect: "postgres",
 });
 
-export const databaseRun = async () => {
+export const databaseRun = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
     console.log("CONNECT");

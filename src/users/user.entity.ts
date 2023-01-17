@@ -7,7 +7,7 @@ export enum Role {
 
 export interface User
   extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-  id?: string;
+  id: string;
   name: string;
   lastName: string;
   email: string;

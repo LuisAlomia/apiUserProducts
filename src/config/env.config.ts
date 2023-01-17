@@ -12,4 +12,5 @@ export const config = {
     host: process.env.DB_HOST || "localhost",
     port: dbPort || 5433,
   },
+  secretKey: process.env.JWT_secretKey || "secretKey",
 };

@@ -2,8 +2,9 @@ import { DataTypes } from "sequelize";
 
 import { sequelize } from "../database/connectDb";
 import { Product as ProductEntity } from "../products/product.entity";
+import { Category } from "./category.model";
 
-export const Product = sequelize.define<ProductEntity>("Product", {
+export const Product = sequelize.define<ProductEntity>("product", {
   id: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -23,5 +24,13 @@ export const Product = sequelize.define<ProductEntity>("Product", {
   },
   image: {
     type: DataTypes.STRING,
+  },
+  categoryId: {
+    type: DataTypes.INTEGER,
+    field: "category_id",
+    references: {
+      key: "id",
+      model: Category,
+    },
   },
 });

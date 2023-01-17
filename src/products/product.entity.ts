@@ -2,11 +2,12 @@ import { Model, InferAttributes, InferCreationAttributes } from "sequelize";
 
 export interface Product
   extends Model<InferAttributes<Product>, InferCreationAttributes<Product>> {
-  id?: string;
+  id: string;
   name: string;
   price: number;
   description: string;
-  image?: string;
+  image: string;
+  categoryId: number;
 }
 
 export interface UpdateProduct {
@@ -15,4 +16,5 @@ export interface UpdateProduct {
   price?: number;
   description?: string;
   image?: string;
+  categoryId?: number;
 }

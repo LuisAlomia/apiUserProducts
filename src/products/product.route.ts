@@ -1,15 +1,34 @@
 import { Router } from "express";
-import * as ProductControllers from "./product.controller";
+import passport from "passport";
 
-export const router = Router();
+import * as ProductControllers from "./product.controller";
+import authRole from "../middlewares/authRole.middleware";
+import {
+  validateDataProducts,
+  validateUpdateDataProducts,
+} from "../validate/validate";
+
+const authUser = passport.authenticate("jwt", { session: false });
+
+export const router: Router = Router();
 
 router
   .route("/")
   .get(ProductControllers.getAll)
-  .post(ProductControllers.create);
+  .post(
+    authUser,
+    authRole(["administrator"]),
+    validateDataProducts,
+    ProductControllers.create
+  );
 
 router
   .route("/:productId")
   .get(ProductControllers.getOne)
-  .patch(ProductControllers.update)
-  .delete(ProductControllers.destroy);
+  .patch(
+    authUser,
+    authRole(["administrator"]),
+    validateUpdateDataProducts,
+    ProductControllers.update
+  )
+  .delete(authUser, authRole(["administrator"]), ProductControllers.destroy);
